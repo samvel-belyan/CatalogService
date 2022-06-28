@@ -32,14 +32,18 @@ public class ProductRepository : IProductRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<List<Product>> GetAllProducts()
+    public async Task<List<Product>> GetProducts(int categoryId, int skip, int count)
     {
-        return await _dbContext.Products.ToListAsync();
+        return await _dbContext.Products
+            .Where(p => p.CategoryId == categoryId)
+            .Skip(skip)
+            .Take(count)
+            .ToListAsync();
     }
 
-    public Task<Product> GetProduct(int id)
+    public async Task<Product> GetProduct(int id)
     {
-        return _dbContext.Products.FirstOrDefaultAsync(a => a.Id == id);
+        return await _dbContext.Products.FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<Product> UpdateProduct(Product category)
@@ -47,5 +51,12 @@ public class ProductRepository : IProductRepository
         _dbContext.Update(category);
         await _dbContext.SaveChangesAsync();
         return category;
+    }
+
+    public async Task DeleteProductsByCategory(int categoryId)
+    {
+        var products = await _dbContext.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+        _dbContext.RemoveRange(products);
+        await _dbContext.SaveChangesAsync();
     }
 }
