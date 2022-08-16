@@ -33,6 +33,11 @@ public class ProductService : IProductService
         return await _productRepository.GetProducts(categoryId, skip, count);
     }
 
+    public async Task<Product> GetProduct(int id)
+    {
+        return await _productRepository.GetProduct(id);
+    }
+
     public async Task<Product> UpdateProduct(Product product)
     {
         var updatedProduct = await _productRepository.UpdateProduct(product);

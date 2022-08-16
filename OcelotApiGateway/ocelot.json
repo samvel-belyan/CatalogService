@@ -1,0 +1,90 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7297"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/products/2/properties",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/products/2/properties",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7146
+        }
+      ],
+      "SwaggerKey": "properties",
+      "Key": "properties"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/products/2/details",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/products/2/details",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7146
+        }
+      ],
+      "SwaggerKey": "details",
+      "Key": "details"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/products",
+      "UpstreamHttpMethod": [
+        "Get",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7146
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/carts",
+      "UpstreamHttpMethod": [
+        "Get",
+        "POST",
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/v1/cart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "properties",
+        "details"
+      ],
+      "UpstreamPathTemplate": "/",
+      "Aggregator": "FakeDefinedAggregator"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "products",
+      "Config": [
+        {
+          "Name": "products api",
+          "Version": "v1",
+          "Url": "https://localhost:7297/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
