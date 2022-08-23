@@ -4,9 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationInsightsResourceId>/subscriptions/9dee8573-0d77-49f7-b5f0-05ad0012710a/resourceGroups/logginghw/providers/microsoft.insights/components/myappinsight</ApplicationInsightsResourceId>
+    <UserSecretsId>02e25625-1a59-4153-94b0-58c4fa54b19e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="MMLib.SwaggerForOcelot" Version="5.2.0" />
     <PackageReference Include="Ocelot" Version="18.0.0" />
     <PackageReference Include="Ocelot.Provider.Consul" Version="18.0.0" />

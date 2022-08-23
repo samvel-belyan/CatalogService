@@ -5,10 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>94731d41-e2f9-4a6f-a10b-488028346d08</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/9dee8573-0d77-49f7-b5f0-05ad0012710a/resourceGroups/logginghw/providers/microsoft.insights/components/myappinsight</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
   </ItemGroup>
 

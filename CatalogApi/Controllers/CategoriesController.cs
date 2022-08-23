@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces;
-using AutoMapper;
 using CatalogApi.Dto;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +12,13 @@ public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
     private readonly LinkGenerator _linkGenerator;
+    private readonly ILogger _logger;
 
-
-    public CategoriesController(ICategoryService categoryService, LinkGenerator linkGenerator)
+    public CategoriesController(ICategoryService categoryService, LinkGenerator linkGenerator, ILogger logger)
     {
         _categoryService = categoryService;
         _linkGenerator = linkGenerator;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -33,12 +33,13 @@ public class CategoriesController : ControllerBase
     {
         if (category is null)
         {
+            _logger.LogError("Category update failed");
             return BadRequest("Category cannot be null");
         }
 
         var result = await _categoryService.AddCategory(category);
 
-        return CreatedAtRoute("general", new { id = category.Id }, category);
+        return CreatedAtRoute("general", new { id = category.Id }, result);
     }
 
     [HttpPut]
@@ -46,6 +47,7 @@ public class CategoriesController : ControllerBase
     {
         if (category is null)
         {
+            _logger.LogError("Category update failed");
             return BadRequest("Category cannot be null");
         }
 
@@ -56,7 +58,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> AddCategory(int id)
+    public async Task<IActionResult> DeleteCategory(int id)
     {
         await _categoryService.DeleteCategory(id);
         return Ok(HttpStatusCode.NoContent);

@@ -17,6 +17,7 @@ builder.Services.AddOcelot(builder.Configuration)
                  .AddSingletonDefinedAggregator<FakeDefinedAggregator>();
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 
 var app = builder.Build();

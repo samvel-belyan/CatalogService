@@ -23,6 +23,7 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 
 
